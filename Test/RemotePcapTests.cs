@@ -89,7 +89,7 @@ namespace Test
                     }
 
                     Assert.Throws<PcapException>(
-                        () => npcapDevices[0].Open(OpenFlags.NoCaptureRemote, 1, badCred),
+                        () => npcapDevices[0].Open(flags: OpenFlags.NoCaptureRemote, read_timeout: 1, credentials: badCred),
                         "Credentials provided to Open() method takes precedence"
                     );
 
