@@ -53,20 +53,7 @@ namespace Example3
 
             // Open the device for capturing
             int readTimeoutMilliseconds = 1000;
-            if (device is NpcapDevice)
-            {
-                var nPcap = device as NpcapDevice;
-                nPcap.Open(OpenFlags.DataTransferUdp | OpenFlags.NoCaptureLocal, readTimeoutMilliseconds);
-            }
-            else if (device is LibPcapLiveDevice)
-            {
-                var livePcapDevice = device as LibPcapLiveDevice;
-                livePcapDevice.Open(OpenFlags.Promiscuous, readTimeoutMilliseconds);
-            }
-            else
-            {
-                throw new InvalidOperationException("unknown device type of " + device.GetType().ToString());
-            }
+            device.Open(flags: OpenFlags.Promiscuous | OpenFlags.DataTransferUdp | OpenFlags.NoCaptureLocal, read_timeout: readTimeoutMilliseconds);
 
             Console.WriteLine();
             Console.WriteLine("-- Listening on {0} {1}, hit 'Enter' to stop...",
